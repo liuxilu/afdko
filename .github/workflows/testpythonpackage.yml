@@ -54,9 +54,10 @@ jobs:
         submodules: true
 
     - name: Use MSBuild (Windows)
-      uses: microsoft/setup-msbuild@v1.0.2
+      uses: microsoft/setup-msbuild@v1.1
       with:
         vs-version: '[16.4,]'
+        msbuild-architecture: x64
       if: matrix.os == 'windows-latest'
 
     - name: Set up Python ${{ matrix.python-version }}
