@@ -32,13 +32,13 @@ jobs:
         fetch-depth: 0  # unshallow fetch for setuptools-scm
 
     - name: Use MSBuild (Windows only)
-      uses: microsoft/setup-msbuild@v1.0.2
+      uses: microsoft/setup-msbuild@v1.1
       if: matrix.os == 'windows-latest'
 
-    - name: Install Python 3.7
+    - name: Install Python 3.8
       uses: actions/setup-python@v2
       with:
-        python-version: '3.7'
+        python-version: '3.8'
 
     - name: Install dependencies
       run: |
@@ -51,9 +51,9 @@ jobs:
         git config --global url.https://github.com/.insteadOf git://github.com/
         python -m cibuildwheel --output-dir dist
       env:
-        CIBW_BUILD: "cp36-*"
+        CIBW_BUILD: "cp38-*"
         CIBW_MANYLINUX_X86_64_IMAGE: manylinux2014
-        CIBW_SKIP: "pp* cp*manylinux_i686 cp*manylinux_aarch64 cp*manylinux_ppc64le cp*manylinux_s390x cp*win32"
+        CIBW_SKIP: "pp* cp*manylinux_i686 cp*manylinux_aarch64 cp*manylinux_ppc64le cp*manylinux_s390x cp*win32 cp*macosx_x86_64 cp*macosx_arm64"
         CIBW_BEFORE_ALL_LINUX: "yum install -y libuuid-devel"
 
     - name: Build sdist (Ubuntu only)
