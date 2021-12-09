@@ -22,14 +22,14 @@ jobs:
       run: |
         echo "Reason for triggering: ${{ github.event.inputs.reason }}"
 
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v2
       with:
         submodules: true
 
-    - name: Set up Python 3.7
-      uses: actions/setup-python@v1
+    - name: Set up Python 3.8
+      uses: actions/setup-python@v2
       with:
-        python-version: 3.7
+        python-version: "3.8"
 
     - name: Build and install AFDKO wheel
       env:
