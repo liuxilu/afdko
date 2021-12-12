@@ -17,7 +17,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [macos-11]
+        os: [macos-latest]
 
     steps:
 
@@ -40,18 +40,13 @@ jobs:
       with:
         python-version: '3.8'
 
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install -r requirements.txt -r requirements-dev.txt
-
     - name: Build wheel
       uses: pypa/cibuildwheel@v2.3.0
       with:
         output-dir: dist
       env:
         CIBW_BUILD: "cp38-*"
-        CIBW_ARCHS_MACOS: arm64
+        CIBW_ARCHS_MACOS: x86_64
 
     - name: Build sdist (Ubuntu only)
       if: matrix.os == 'ubuntu-latest'
