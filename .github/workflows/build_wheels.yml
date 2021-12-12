@@ -50,8 +50,8 @@ jobs:
       with:
         output-dir: dist
       env:
-        CIBW_BUILD: "cp38-macosx_universal2"
-        CIBW_ARCHS_MACOS: universal2
+        CIBW_BUILD: "cp38-*"
+        CIBW_ARCHS_MACOS: x86_64
 
     - name: Build sdist (Ubuntu only)
       if: matrix.os == 'ubuntu-latest'
