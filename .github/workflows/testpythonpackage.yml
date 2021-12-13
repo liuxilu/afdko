@@ -96,4 +96,8 @@ jobs:
 
     - name: Test with pytest
       run: |
-        python -m pytest --no-cov tests
+        python -m pytest --no-cov tests --color=yes
+
+    - name: Test uninstall AFDKO
+      run: |
+        python -m pip uninstall afdko -y
