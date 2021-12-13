@@ -2,10 +2,17 @@ name: C and Python coverage
 
 on:
   push:
-    branches:
-      - '*'
+    paths-ignore:
+      - 'docs/**'
+      - '**.md'
+
   pull_request:
-    branches: [master, develop]
+    branches: [develop]
+    types: [opened]
+    paths-ignore:
+      - 'docs/**'
+      - '**.md'
+
   workflow_dispatch:
     inputs:
       reason:
