@@ -17,7 +17,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [macos-latest]
+        os: [ubuntu-latest, windows-latest, macos-latest]
 
     steps:
 
@@ -47,6 +47,11 @@ jobs:
       env:
         CIBW_BUILD: "cp38-*"
         CIBW_ARCHS_MACOS: x86_64
+        CIBW_ARCHS_WINDOWS: AMD64
+        CIBW_ARCHS_LINUX: x86_64
+        CIBW_MANYLINUX_X86_64_IMAGE: manylinux2014
+        CIBW_SKIP: "*musllinux*"
+        CIBW_BEFORE_ALL_LINUX: "yum install -y libuuid-devel"
 
     - name: Build sdist (Ubuntu only)
       if: matrix.os == 'ubuntu-latest'
