@@ -31,10 +31,6 @@ jobs:
       with:
         fetch-depth: 0  # unshallow fetch for setuptools-scm
 
-    - name: Use MSBuild (Windows only)
-      uses: microsoft/setup-msbuild@v1.1
-      if: matrix.os == 'windows-latest'
-
     - name: Install Python 3.8
       uses: actions/setup-python@v2
       with:
@@ -74,6 +70,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+
     - name: Get date & flat tag
       id: date_tag
       run: |
