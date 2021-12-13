@@ -29,9 +29,10 @@ jobs:
       run: |
         echo "Reason for triggering: ${{ github.event.inputs.reason }}"
 
-    - uses: actions/checkout@v2
+    - name: Check out
+      uses: actions/checkout@v2
       with:
-        submodules: true
+        fetch-depth: 0  # unshallow fetch for setuptools-scm
 
     - name: Set up Python 3.8
       uses: actions/setup-python@v2
@@ -44,7 +45,6 @@ jobs:
       run: |
         git config --global url.https://github.com/.insteadOf git://github.com/
         python -m pip install --upgrade pip
-        python -m pip install -r requirements-dev.txt
         python -m pip install build>=0.7.0
         python -m build --wheel
         echo 'Installing AFDKO wheel...'
