@@ -1168,3 +1168,18 @@ def test_lib_removes_outlines_bug1366():
     expected_path = generate_ps_dump(expected_path)
     output_path = generate_ps_dump(output_path)
     assert differ([expected_path, output_path, '-s', PFA_SKIP[0]])
+
+
+def test_ufo_overwrite():
+    """ If output UFO already exists in destination, delete existing
+        UFO directory, then make a new directory.
+    """
+    input_path = get_input_path("pfa-start-pt-with-float.pfa")
+    expected_path = get_expected_path("pfa-start-pt-with-float.ufo")
+    output_path = get_temp_dir_path('ufo-already-existed.ufo')
+    runner(CMD + ['-a', '-o', 'ufo', '-f', input_path, output_path])
+    stderr_path = runner(CMD + ['-a', '-o', 'ufo', '-f', input_path, output_path])
+    with open(stderr_path, 'rb') as f:
+        output = f.read()
+    assert b'Destination UFO font overwritten: ' in output
+
