@@ -54,6 +54,10 @@ def run(options):
         ext = '.otf' if font.sfntVersion == 'OTTO' else '.ttf'
         font_filename = f'{psname}{ext}'
 
+        if options.font_filenames != None:
+            if font_filename not in options.font_filenames:
+                continue
+
         if options.report:
             # this code is based on fontTools.ttx.ttList
             reader = font.reader
@@ -105,6 +109,15 @@ def get_options(args):
         '--report',
         action='store_true',
         help="report the TTC's fonts and tables (no files are written)",
+    )
+    parser.add_argument(
+        '-n',
+        '--file-names',
+        nargs='+',
+        dest='font_filenames',
+        metavar='FILE_NAMES',
+        help='file names of fonts to handle\n'
+             'You can obtain them by -r',
     )
     parser.add_argument(
         'ttc_path',
